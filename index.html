@@ -195,21 +195,21 @@ class Mobil {
 void main() {
   print('--- Demonstrasi Class Mobil ---');
 
-  var mobilA = Mobil('Toyota', 2021);
+  var mobilA = Mobil('Daihatsu', 2023);
   print('Mobil A: $mobilA');
 
   var mobilB = Mobil.baru();
   print('Mobil B: $mobilB');
 
-  String jsonString = '{"merk": "Suzuki", "tahun": 2021}';
+  String jsonString = '{"merk": "Avanza", "tahun": 2025}';
   Map<String, dynamic> jsonData = jsonDecode(jsonString);
 
   var mobilC = Mobil.dariJson(jsonData);
   print('Mobil C: $mobilC');
 
   Map<String, dynamic> anotherJsonData = {
-    'merk': 'Mitsubishi',
-    'tahun': 2023
+    'merk': 'Suzuki',
+    'tahun': 2022
   };
 
   var mobilD = Mobil.dariJson(anotherJsonData);
