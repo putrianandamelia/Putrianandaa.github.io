@@ -118,6 +118,39 @@ Konstruktor merupakan method khusus dalam class yang digunakan untuk membuat ata
 </div>
 
 <div class="section">
+<h2>Constructors Dasar</h2>
+<p>
+Constructor adalah method khusus dalam sebuah class yang digunakan untuk menginisialisasi nilai atribut saat objek dibuat. Constructor memiliki nama yang sama dengan nama class dan akan otomatis dijalankan ketika objek dibuat. Dengan constructor, nilai atribut dapat langsung diberikan saat pembuatan objek.
+Contoh penerapan class Buku dengan constructor dasar pada Dart:
+</p>
+  
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+  
+class Buku {
+  String judul;
+
+  // constructor
+  Buku(this.judul);
+}
+
+void main() {
+  var buku1 = Buku("Pemrograman Berorientasi Objek");
+
+  print(buku1.judul);
+}
+</pre>
+</div>
+
+<button class="btn-run" onclick="openPopup('5b262daf776f0c852b322d3673500048')">
+Run di DartPad
+</button>
+</div>
+
+<div class="section">
 <h2>Jenis-jenis Konstruktor Dart</h2>
 <p>
 Default Constructor, Named Constructor, Parameterized Constructor, Constant Constructor.
@@ -145,8 +178,8 @@ class Mobil {
   Mobil(this.merk, this.tahun);
 
   Mobil.baru() {
-    merk = 'Toyota';
-    tahun = 2023;
+    merk = 'Hyundai';
+    tahun = 2024;
   }
 
   Mobil.dariJson(Map<String, dynamic> json) {
@@ -162,7 +195,7 @@ class Mobil {
 void main() {
   print('--- Demonstrasi Class Mobil ---');
 
-  var mobilA = Mobil('Honda', 2020);
+  var mobilA = Mobil('Toyota', 2021);
   print('Mobil A: $mobilA');
 
   var mobilB = Mobil.baru();
@@ -176,7 +209,7 @@ void main() {
 
   Map<String, dynamic> anotherJsonData = {
     'merk': 'Mitsubishi',
-    'tahun': 2022
+    'tahun': 2023
   };
 
   var mobilD = Mobil.dariJson(anotherJsonData);
@@ -273,7 +306,62 @@ Run di DartPad
 </div>
 
 <div class="section">
-<h2>Class Person (Private Variable)</h2>
+<h2>Praktik 1: Multiple Constructor</h2>
+<p>
+Pada praktik ini dibuat class Mahasiswa yang memiliki atribut seperti nama dan umur. Class ini menggunakan multiple constructor, yaitu satu class memiliki lebih dari satu constructor. 
+Constructor yang digunakan adalah constructor default, Mahasiswa.dariMap(), dan Mahasiswa.tanpaNama() untuk membuat objek dengan cara yang berbeda.
+</p>
+  
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+  
+class Mahasiswa {
+  String? nama;
+  int? umur;
+
+  Mahasiswa(this.nama, this.umur);
+
+  Mahasiswa.dariMap(Map<String, dynamic> data) {
+    nama = data['nama'];
+    umur = data['umur'];
+  }
+
+  Mahasiswa.tanpaNama() {
+    nama = "Tidak diketahui";
+    umur = 18;
+  }
+
+  void tampilkan() {
+    print("Nama: $nama, Umur: $umur");
+  }
+}
+
+void main() {
+
+  var mhs1 = Mahasiswa("Putri", 19);
+
+  var data = {"nama": "Ananda", "umur": 21};
+  var mhs2 = Mahasiswa.dariMap(data);
+
+  var mhs3 = Mahasiswa.tanpaNama();
+
+  mhs1.tampilkan();
+  mhs2.tampilkan();
+  mhs3.tampilkan();
+}
+</pre>
+</div>
+
+<button class="btn-run" onclick="openPopup('7165f8d14a56999d27427a8ba9994287')">
+Run di DartPad
+</button>
+</div>
+
+<div class="section">
+<h2>Public & Private</h2>
 <p>
 Dalam Dart, variabel yang diawali dengan tanda underscore (_) bersifat private sehingga tidak dapat diakses langsung dari luar class.
 </p>
@@ -440,13 +528,13 @@ class Produk {
 }
 
 void main() {
-  var produk1 = Produk('Monitor Samsung', 3500.0);
+  var produk1 = Produk('Headset', 4500.0);
 
   print('Nama Produk: ${produk1.nama}');
   print('Harga Produk: Rp ${produk1.harga}');
 
-  produk1.nama = 'Keyboard Mekanik';
-  produk1.harga = 1200.0;
+  produk1.nama = 'Headset Gaming';
+  produk1.harga = 5200.0;
 
   print('Nama Produk baru: ${produk1.nama}');
   print('Harga Produk baru: Rp ${produk1.harga}');
@@ -461,7 +549,73 @@ Run di DartPad
 </div>
 
 <div class="section">
-<h2>Class User ( Login & Ganti Password )</h2>
+<h2>Praktik 2: Enkapsulasi Lengkap</h2>
+<p>
+Pada praktik ini dibuat class User yang menggunakan konsep enkapsulasi. Data disimpan dalam field private yaitu _username, _password, dan _email.
+Akses terhadap data tersebut dilakukan menggunakan getter dan setter, dimana setter memiliki validasi seperti username minimal 5 karakter, password minimal 8 karakter, dan email harus mengandung @.
+</p>
+  
+<div class="preview-box">
+<pre>
+// Nama  : Putri Ananda Amelia
+// NIM   : 251410029
+// Kelas : SI2A
+  
+class User {
+  String _username = "";
+  String _password = "";
+  String _email = "";
+
+  String get username => _username;
+  String get password => _password;
+  String get email => _email;
+
+  set username(String value) {
+    if (value.length >= 5) {
+      _username = value;
+    } else {
+      print("Username minimal 5 karakter");
+    }
+  }
+
+  set password(String value) {
+    if (value.length >= 8) {
+      _password = value;
+    } else {
+      print("Password minimal 8 karakter");
+    }
+  }
+
+  set email(String value) {
+    if (value.contains("@")) {
+      _email = value;
+    } else {
+      print("Email harus mengandung @");
+    }
+  }
+}
+
+void main() {
+  var user = User();
+
+  user.username = "putri1412";
+  user.password = "55695678";
+  user.email = "putri@gmail.com";
+
+  print("Username: ${user.username}");
+  print("Password: ${user.password}");
+  print("Email: ${user.email}");
+}
+</pre>
+</div>
+
+<button class="btn-run" onclick="openPopup('2fc545480d9f797ab3e7d4bf8004f538')">
+Run di DartPad
+</button>
+</div>
+
+<div class="section">
+<h2>Sistem Login Sederhana</h2>
 <p>
 Contoh ini menunjukkan penerapan enkapsulasi pada sistem login sederhana, dimana username dan password disimpan sebagai variabel private dan proses login dilakukan melalui method dalam class.
 </p>
@@ -498,17 +652,17 @@ class User {
 }
 
 void main() {
-  final user1 = User('admin_user', 'securePass123');
+  final user1 = User('admin_user', 'password445');
 
   print('User: ${user1.username}');
 
-  if (user1.login('admin_user', 'securePass123')) {
+  if (user1.login('admin_user', 'password445')) {
     print('Login berhasil');
   } else {
     print('Login gagal');
   }
 
-  user1.gantiPassword('securePass123', 'newSecurePass456');
+  user1.gantiPassword('password445', 'passwordBaru006');
 }
 </pre>
 </div>
@@ -529,7 +683,7 @@ Selain itu, konsep enkapsulasi digunakan untuk melindungi data dalam sebuah clas
 </div>
 
 <div class="section">
-<h2>Tugas 1 Bonus 2: Class Rekening Bank</h2>
+<h2>Bonus 3: Class Rekening Bank</h2>
 <p>
 Program ini membuat kelas RekeningBank menggunakan konsep enkapsulasi dalam OOP.
 Kelas ini memiliki field private _nomorRekening dan _saldo.
